@@ -18,11 +18,12 @@ WORKDIR /app
 
 COPY ["build.gradle", "gradlew", "./"]
 COPY gradle gradle
-RUN chmod +x gradlew
+RUN chmod 777 gradlew 
 RUN ./gradlew downloadRepos
 
 COPY . .
 RUN chmod +x gradlew
+ 
 RUN ./gradlew installDist
 
 FROM eclipse-temurin:19.0.1_10-jre-alpine@sha256:a75ea64f676041562cd7d3a54a9764bbfb357b2bf1bebf46e2af73e62d32e36c as without-grpc-health-probe-bin
